@@ -4,6 +4,30 @@ A Chrome extension for learning the English words you run into while browsing. S
 
 Original idea blogpost from 2007: [İngilizce Yazılım Projesi](https://samilkorkmaz.blogspot.com/2007/11/ingilizce-yazlm-projesi.html)
 
+## Installation
+
+The extension isn't on the Chrome Web Store yet, so it's installed from the source folder:
+
+1. Download or clone this repository.
+2. Open `chrome://extensions` in Chrome.
+3. Turn on **Developer mode** (top-right corner).
+4. Click **Load unpacked** and select the project folder.
+
+It also works in other Chromium-based browsers, such as Edge and Brave, through their own extensions page.
+
+After changing the code, click the reload button on the extension's card in `chrome://extensions`.
+
+## Usage
+
+1. Select a word on any web page.
+2. Right-click and choose **Add to Vocabulary**.
+3. Click the extension's icon in the toolbar to open it. It has three tabs:
+   - **Database:** your saved words, plus the export, backup and delete buttons.
+   - **Quiz:** flashcard questions for the words that are due for review. The quiz needs at least two words with a definition or example sentence.
+   - **Performance:** your statistics and history.
+
+To restore a backup, click **Restore** in the popup. The extension opens in a full browser tab. Click **Restore** again there and choose the backup file. Restoring replaces all current data.
+
 ## Features
 
 - **One-click saving.** Select a word, right-click, and choose **Add to Vocabulary**.
@@ -33,30 +57,6 @@ Original idea blogpost from 2007: [İngilizce Yazılım Projesi](https://samilko
   - **Download CSV:** opens in Excel or Google Sheets, or imports into Anki.
   - **Back up / Restore:** saves everything, including quiz progress and history, to a JSON file and loads it back.
   - **Delete all:** clears every word and the quiz history, after asking for confirmation.
-
-## Installation
-
-The extension isn't on the Chrome Web Store yet, so it's installed from the source folder:
-
-1. Download or clone this repository.
-2. Open `chrome://extensions` in Chrome.
-3. Turn on **Developer mode** (top-right corner).
-4. Click **Load unpacked** and select the project folder.
-
-It also works in other Chromium-based browsers, such as Edge and Brave, through their own extensions page.
-
-After changing the code, click the reload button on the extension's card in `chrome://extensions`.
-
-## Usage
-
-1. Select a word on any web page.
-2. Right-click and choose **Add to Vocabulary**.
-3. Click the extension's icon in the toolbar to open it. It has three tabs:
-   - **Database:** your saved words, plus the export, backup and delete buttons.
-   - **Quiz:** flashcard questions for the words that are due for review. The quiz needs at least two words with a definition or example sentence.
-   - **Performance:** your statistics and history.
-
-To restore a backup, click **Restore** in the popup. The extension opens in a full browser tab. Click **Restore** again there and choose the backup file. Restoring replaces all current data.
 
 ## Privacy
 
