@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "English Vocab Builder",
+  "version": "1.1",
+  "description": "Saves selected words with their definitions and example sentences, and quizzes you with flashcards.",
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}

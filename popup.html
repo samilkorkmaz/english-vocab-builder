@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: sans-serif; width: 460px; margin: 0; padding: 12px; }
+    .tabs { display: flex; border-bottom: 2px solid #ccc; margin-bottom: 12px; }
+    .tab-btn { flex: 1; padding: 8px; border: none; background: #f0f0f0; cursor: pointer; font-weight: bold; }
+    .tab-btn.active { background: #007bff; color: white; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th, td { border: 1px solid #ddd; padding: 6px; text-align: left; vertical-align: top; }
+    th { background-color: #f4f4f4; }
+
+    .toolbar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+    #data-status { font-size: 12px; color: #28a745; margin: 0 0 8px; }
+    #data-status:empty { display: none; }
+    #data-status.error { color: #dc3545; }
+    .small-btn { padding: 4px 8px; cursor: pointer; border: 1px solid #007bff; background: #fff; border-radius: 4px; }
+    .small-btn:hover { background: #e7f0ff; }
+    .danger-btn { border-color: #dc3545; color: #dc3545; }
+    .danger-btn:hover { background: #f8d7da; }
+
+    .card { border: 1px solid #ccc; padding: 12px; border-radius: 6px; text-align: center; }
+    #quiz-detail { font-style: italic; background: #f8f9fa; padding: 8px; border-radius: 4px; }
+    #quiz-detail:empty { display: none; }
+    .option-btn { display: block; width: 100%; margin: 6px 0; padding: 8px; cursor: pointer; border: 1px solid #007bff; background: #fff; border-radius: 4px; color: inherit; }
+    .option-btn:hover:not(:disabled) { background: #e7f0ff; }
+    .option-btn:disabled { cursor: default; }
+    .option-btn.correct { background: #d4edda; border-color: #28a745; }
+    .option-btn.wrong { background: #f8d7da; border-color: #dc3545; }
+    #quiz-feedback { font-weight: bold; }
+    #quiz-feedback.correct { color: #28a745; }
+    #quiz-feedback.wrong { color: #dc3545; }
+
+    .stats-section { margin-top: 12px; }
+    .stats-section h4 { margin: 0 0 6px; }
+    .empty-note { color: #888; font-size: 12px; }
+  </style>
+</head>
+<body>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="list">Database</button>
+    <button class="tab-btn" data-tab="quiz">Quiz</button>
+    <button class="tab-btn" data-tab="stats">Performance</button>
+  </div>
+
+  <!-- 1. Database table -->
+  <div id="list" class="tab-content active">
+    <div class="toolbar">
+      <button id="export-html" class="small-btn">Download HTML</button>
+      <button id="export-csv" class="small-btn">Download CSV</button>
+      <button id="backup" class="small-btn" title="Words, box levels and quiz history">Back up</button>
+      <button id="restore" class="small-btn" title="Restore from a backup file">Restore</button>
+      <button id="delete-all" class="small-btn danger-btn" title="Delete all words and quiz history">Delete all</button>
+      <input type="file" id="restore-file" accept=".json,application/json" hidden>
+    </div>
+    <p id="data-status"></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>English Definition</th>
+          <th>Example Sentence</th>
+        </tr>
+      </thead>
+      <tbody id="vocab-table-body"></tbody>
+    </table>
+  </div>
+
+  <!-- 2. Flashcard quiz mode -->
+  <div id="quiz" class="tab-content">
+    <div id="quiz-container" class="card">
+      <h3 id="quiz-question">Loading...</h3>
+      <p id="quiz-detail"></p>
+      <div id="quiz-options"></div>
+      <p id="quiz-feedback"></p>
+      <button id="quiz-next" class="small-btn" hidden>Next question</button>
+    </div>
+  </div>
+
+  <!-- 3. Performance history -->
+  <div id="stats" class="tab-content">
+    <div class="card">
+      <h4>Statistics</h4>
+      <p>Total correct: <b id="stat-correct">0</b></p>
+      <p>Total wrong: <b id="stat-wrong">0</b></p>
+      <p>Accuracy: <b id="stat-rate">0%</b></p>
+    </div>
+
+    <div class="stats-section">
+      <h4>Missed Words</h4>
+      <p id="missed-empty" class="empty-note">No wrong answers yet.</p>
+      <table>
+        <thead>
+          <tr><th>Word</th><th>Wrong</th><th>Correct</th><th>Box</th></tr>
+        </thead>
+        <tbody id="missed-body"></tbody>
+      </table>
+    </div>
+
+    <div class="stats-section">
+      <h4>Daily History (last 14 days)</h4>
+      <p id="history-empty" class="empty-note">No quizzes taken yet.</p>
+      <table>
+        <thead>
+          <tr><th>Date</th><th>Correct</th><th>Wrong</th><th>Accuracy</th></tr>
+        </thead>
+        <tbody id="history-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="common.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
