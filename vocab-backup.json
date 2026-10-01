@@ -1,0 +1,107 @@
+{
+  "app": "english-vocab-builder",
+  "backupVersion": 1,
+  "createdAt": "2026-10-01T14:00:39.611Z",
+  "vocabList": [
+    {
+      "box": 1,
+      "contextSentence": "“One of the clearest points of demarcation between specialist discourses and everyday commentary and debate is that the former are often structured by what might be thought of as “explanatory inversions.” These arise as a consequence of discov…",
+      "correctCount": 0,
+      "dateAdded": "9/24/2026",
+      "definition": "The act of marking off a boundary or setting a limit, notably by belligerents signing a treaty or ceasefire.",
+      "id": 1790253701585,
+      "nextReview": 1790253701585,
+      "word": "demarcation",
+      "wrongCount": 0
+    },
+    {
+      "box": 1,
+      "contextSentence": "To illustrate, Heath gives the example of social deviance in criminology:",
+      "correctCount": 0,
+      "dateAdded": "9/24/2026",
+      "definition": "Actions or behaviors that violate formal and informal cultural norms such as laws and customs.",
+      "id": 1790253740925,
+      "nextReview": 1790253740926,
+      "word": "deviance",
+      "wrongCount": 0
+    },
+    {
+      "box": 1,
+      "contextSentence": "Common sense provides us with a wealth of explanations, which seek to identify the motives that impel people toward criminal acts.",
+      "correctCount": 0,
+      "dateAdded": "9/24/2026",
+      "definition": "To urge a person; to press on; to incite to action or motion via intrinsic motivation.",
+      "id": 1790253780236,
+      "nextReview": 1790253780236,
+      "word": "impel",
+      "wrongCount": 0
+    },
+    {
+      "box": 1,
+      "contextSentence": "Instead, the truly puzzling fact is that humanity has—sometimes, in some places—achieved spectacular systems of large-scale cooperation that pressure, cajole, persuade, encourage, incentivise, and tempt a species of competitive apes to work together, dampening down immediate self-interest and overcoming collective action problems.",
+      "correctCount": 0,
+      "dateAdded": "9/24/2026",
+      "definition": "To persuade someone to do something which they are reluctant to do, especially by flattery or promises; to coax.",
+      "id": 1790253939353,
+      "nextReview": 1790253939353,
+      "word": "cajole",
+      "wrongCount": 0
+    },
+    {
+      "box": 1,
+      "contextSentence": "Science's unique feature—the source of its unprecedented power as an engine of knowledge and discovery—concerns how it certifies reliable discoveries and adjudicates disagreements.",
+      "correctCount": 0,
+      "dateAdded": "9/24/2026",
+      "definition": "third-person singular simple present indicative of adjudicate",
+      "id": 1790256350708,
+      "nextReview": 1790256350708,
+      "word": "adjudicates",
+      "wrongCount": 0
+    },
+    {
+      "box": 1,
+      "contextSentence": "This was a central theme in the work of Thorstein Veblen, whose concept of “conspicuous consumption” captured the fact that people often consume products not for their direct “utility” but to flaunt their status and social class.",
+      "correctCount": 0,
+      "dateAdded": "9/30/2026",
+      "definition": "Obvious or easy to notice.",
+      "id": 1790754083602,
+      "nextReview": 1790754083602,
+      "word": "conspicuous",
+      "wrongCount": 0
+    },
+    {
+      "box": 1,
+      "contextSentence": "This was a central theme in the work of Thorstein Veblen, whose concept of “conspicuous consumption” captured the fact that people often consume products not for their direct “utility” but to flaunt their status and social class.",
+      "correctCount": 0,
+      "dateAdded": "9/30/2026",
+      "definition": "To wave or flutter smartly in the wind.",
+      "id": 1790754090665,
+      "nextReview": 1790754090665,
+      "word": "flaunt",
+      "wrongCount": 0
+    },
+    {
+      "box": 1,
+      "contextSentence": "In Moral Origins, Christopher Boehm describes how this suspicion operates in many hunter-gatherer societies, creating a social climate in which vigilance, ridicule, and ostracism constrain the ambitions of status seekers and self-aggrandisers.",
+      "correctCount": 0,
+      "dateAdded": "9/30/2026",
+      "definition": "Error while fetching the definition.",
+      "id": 1790754257812,
+      "nextReview": 1790754257812,
+      "word": "ostracism",
+      "wrongCount": 0
+    },
+    {
+      "box": 1,
+      "contextSentence": "For right-wing populist voters, in contrast, experts are viewed not just as a rival political tribe but as a condescending social class.",
+      "correctCount": 0,
+      "dateAdded": "9/30/2026",
+      "definition": "Assuming a tone of superiority, or a patronizing attitude.",
+      "id": 1790754798236,
+      "nextReview": 1790754798236,
+      "word": "condescending",
+      "wrongCount": 0
+    }
+  ],
+  "answerHistory": []
+}
