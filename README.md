@@ -4,6 +4,8 @@ A Chrome extension for learning the English words you run into while browsing. S
 
 Original idea blogpost from 2007: [İngilizce Yazılım Projesi](https://samilkorkmaz.blogspot.com/2007/11/ingilizce-yazlm-projesi.html)
 
+Vocabulary backup file: https://github.com/samilkorkmaz/english-vocab-builder/blob/main/vocab-backup.json
+
 ## Installation
 
 The extension isn't on the Chrome Web Store yet, so it's installed from the source folder:
