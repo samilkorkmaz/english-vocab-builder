@@ -38,6 +38,10 @@
     .stats-section { margin-top: 12px; }
     .stats-section h4 { margin: 0 0 6px; }
     .empty-note { color: #888; font-size: 12px; }
+
+    #confirm-dialog { max-width: 380px; border: 1px solid #ccc; border-radius: 6px; padding: 12px; }
+    #confirm-dialog p { margin: 0 0 12px; font-size: 13px; }
+    #confirm-dialog form { display: flex; justify-content: flex-end; gap: 6px; }
   </style>
 </head>
 <body>
@@ -113,6 +117,15 @@
       </table>
     </div>
   </div>
+
+  <!-- Confirmation dialog (used instead of confirm(), which Safari popups don't show) -->
+  <dialog id="confirm-dialog">
+    <p id="confirm-message"></p>
+    <form method="dialog">
+      <button value="cancel" class="small-btn">Cancel</button>
+      <button value="ok" class="small-btn danger-btn">Continue</button>
+    </form>
+  </dialog>
 
   <script src="common.js"></script>
   <script src="popup.js"></script>

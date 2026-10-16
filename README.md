@@ -1,6 +1,6 @@
 # English Vocab Builder
 
-A Chrome extension for learning the English words you run into while browsing. Select a word, right-click, and it's saved with its English definition and the sentence you found it in. Later, the extension quizzes you with flashcards and uses spaced repetition so you review the words you don't know yet more often.
+A Chrome and Safari extension for learning the English words you run into while browsing. Select a word, right-click, and it's saved with its English definition and the sentence you found it in. Later, the extension quizzes you with flashcards and uses spaced repetition so you review the words you don't know yet more often.
 
 Original idea blogpost from 2007: [İngilizce Yazılım Projesi](https://samilkorkmaz.blogspot.com/2007/11/ingilizce-yazlm-projesi.html)
 
@@ -8,7 +8,9 @@ Vocabulary backup file: https://github.com/samilkorkmaz/english-vocab-builder/bl
 
 ## Installation
 
-The extension isn't on the Chrome Web Store yet, so it's installed from the source folder:
+The extension isn't on the Chrome Web Store or the Mac App Store yet, so it's installed from the source folder.
+
+### Chrome
 
 1. Download or clone this repository.
 2. Open `chrome://extensions` in Chrome.
@@ -18,6 +20,25 @@ The extension isn't on the Chrome Web Store yet, so it's installed from the sour
 It also works in other Chromium-based browsers, such as Edge and Brave, through their own extensions page.
 
 After changing the code, click the reload button on the extension's card in `chrome://extensions`.
+
+### Safari (macOS)
+
+Safari runs web extensions only inside a small Mac app, so the folder is first wrapped in an Xcode project. You need Xcode, which is free on the Mac App Store. The code is the same as Chrome's; there's no separate Safari version to maintain.
+
+1. Download or clone this repository.
+2. Create the Xcode project. Run this in Terminal from the folder that *contains* the project folder, so the Xcode project is created next to it rather than inside it:
+   ```
+   xcrun safari-web-extension-converter english-vocab-builder --macos-only --app-name EnglishVocabBuilder --bundle-identifier com.example.EnglishVocabBuilder
+   ```
+   Keep the app name without spaces: otherwise the converter gives the app and the extension mismatched bundle identifiers and the build fails. The project refers to the source folder, so code changes don't need a new conversion.
+3. Xcode opens the project. Choose **Product → Run** (⌘R). This builds a small app and registers the extension with Safari.
+4. In Safari, open **Settings → Advanced** and turn on **Show features for web developers**.
+5. Open the new **Developer** tab in Settings and turn on **Allow unsigned extensions**. Safari turns this off again every time it quits, so repeat this step after restarting Safari. You can skip it by adding your Apple ID in Xcode under **Settings → Accounts** and choosing it as the team under **Signing & Capabilities** for both targets.
+6. Open the **Extensions** tab, turn on **English Vocab Builder** and allow it on all websites.
+
+After changing the code, choose **Product → Run** in Xcode again.
+
+Words saved in Chrome don't carry over to Safari. Use **Back up** in Chrome and **Restore** in Safari to move them.
 
 ## Usage
 
@@ -80,7 +101,8 @@ Removing the extension deletes your data. Use **Back up** first if you want to k
 ## Known limitations
 
 - **Menu position:** Chrome always puts extension items in their own section of the right-click menu. Extensions can't make an item the first entry.
-- **No mobile support:** Chrome on iOS and Android doesn't run extensions.
+- **No mobile support:** Chrome on iOS and Android doesn't run extensions. Safari on iOS does, but the project is only set up and tested for macOS.
+- **Safari exports:** a Safari popup can't download files, so in Safari the **Download HTML**, **Download CSV** and **Back up** buttons first open the extension in a full tab. Click the button again there to download the file.
 - **Sentence detection** splits on `.`, `!` and `?`, so abbreviations like "Mr." can cut a sentence short. No sentence is saved on pages where scripts can't run, such as `chrome://` pages, the Chrome Web Store and some PDFs.
 - **Inflected forms:** words are saved in the form you selected. Selecting "running" saves Wiktionary's entry for "running" ("present participle and gerund of run"), and the quiz blanks out only that exact form.
 

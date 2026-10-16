@@ -5,19 +5,23 @@ const HISTORY_DAYS_SHOWN = 14;
 const BACKUP_APP_ID = 'english-vocab-builder';
 
 // Opened in a full tab instead of the popup? (needed for the restore file picker)
-const IS_TAB = new URLSearchParams(location.search).has('tab');
+const PARAMS = new URLSearchParams(location.search);
+const IS_TAB = PARAMS.has('tab');
+
+// Safari popups can't start downloads, so there the export buttons open the extension in a full tab first
+const IS_SAFARI = /Safari/.test(navigator.userAgent) && !/Chrome|Chromium|Edg/.test(navigator.userAgent);
 
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => switchTab(btn));
   });
-  document.getElementById('export-html').addEventListener('click', exportHtml);
-  document.getElementById('export-csv').addEventListener('click', exportCsv);
-  document.getElementById('backup').addEventListener('click', exportBackup);
+  document.getElementById('export-html').addEventListener('click', inTabOnSafari('export-html', exportHtml));
+  document.getElementById('export-csv').addEventListener('click', inTabOnSafari('export-csv', exportCsv));
+  document.getElementById('backup').addEventListener('click', inTabOnSafari('backup', exportBackup));
   document.getElementById('restore').addEventListener('click', startRestore);
   document.getElementById('restore-file').addEventListener('change', restoreBackup);
   document.getElementById('delete-all').addEventListener('click', deleteAll);
-  if (IS_TAB) showStatus('Click "Restore" to choose a backup file.');
+  if (IS_TAB) showTabHint(PARAMS.get('tab'));
   document.getElementById('quiz-next').addEventListener('click', initQuiz);
 
   loadTable();
@@ -148,14 +152,41 @@ async function exportBackup() {
   download(`vocab-backup-${fileDate()}.json`, JSON.stringify(backup, null, 2), 'application/json');
 }
 
+function openInTab(buttonId) {
+  chrome.tabs.create({ url: chrome.runtime.getURL(`popup.html?tab=${buttonId}`) });
+  window.close();
+}
+
+// In the tab, tell the user which button to click again (the download/file picker needs a fresh click there)
+function showTabHint(buttonId) {
+  const button = document.getElementById(buttonId || 'restore');
+  if (!button) return;
+  const action = buttonId === 'restore' || !buttonId ? 'choose a backup file' : 'download the file';
+  showStatus(`Click "${button.textContent}" to ${action}.`);
+}
+
+function inTabOnSafari(buttonId, action) {
+  return () => (IS_SAFARI && !IS_TAB ? openInTab(buttonId) : action());
+}
+
 function startRestore() {
   // Opening a file picker can close the popup, so the extension is opened in a full tab
   if (!IS_TAB) {
-    chrome.tabs.create({ url: chrome.runtime.getURL('popup.html?tab') });
-    window.close();
+    openInTab('restore');
     return;
   }
   document.getElementById('restore-file').click();
+}
+
+// Safari popups don't show confirm(), so the question is asked in a dialog inside the page
+function askConfirm(message) {
+  const dialog = document.getElementById('confirm-dialog');
+  document.getElementById('confirm-message').textContent = message;
+  dialog.returnValue = ''; // Esc closes without a value; don't reuse the previous answer
+  dialog.showModal();
+  return new Promise(resolve => {
+    dialog.addEventListener('close', () => resolve(dialog.returnValue === 'ok'), { once: true });
+  });
 }
 
 async function restoreBackup(event) {
@@ -178,7 +209,7 @@ async function restoreBackup(event) {
   const vocabList = backup.vocabList.filter(item => item && typeof item === 'object' && 'id' in item);
   const answerHistory = Array.isArray(backup.answerHistory) ? backup.answerHistory : [];
   const currentCount = (await Store.getVocab()).length;
-  if (!confirm(`Your current ${currentCount} words will be deleted and the ${vocabList.length} words from the backup will be loaded. Continue?`)) {
+  if (!await askConfirm(`Your current ${currentCount} words will be deleted and the ${vocabList.length} words from the backup will be loaded. Continue?`)) {
     return;
   }
 
@@ -195,7 +226,7 @@ async function deleteAll() {
     showStatus('The database is already empty.');
     return;
   }
-  if (!confirm(`Delete all ${vocabList.length} words and ${history.length} quiz records? This cannot be undone. Use "Back up" first if you want to keep a copy.`)) {
+  if (!await askConfirm(`Delete all ${vocabList.length} words and ${history.length} quiz records? This cannot be undone. Use "Back up" first if you want to keep a copy.`)) {
     return;
   }
 
